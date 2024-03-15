@@ -14,6 +14,7 @@ const corsOptions = {
 };
 
 // configuraciones iniciales de middlewares
+app.use('/imagenes', express.static('imagenes'));
 app.use(cors(corsOptions));
 app.use(urlencoded({ extended: false }));
 app.use(bodyParser.json());

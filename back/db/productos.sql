@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2024 a las 22:11:03
+-- Tiempo de generación: 15-03-2024 a las 01:49:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -59,6 +59,7 @@ CREATE TABLE `colecciones` (
 INSERT INTO `colecciones` (`id_coleccion`, `descripcion`) VALUES
 (1, 'Gamming'),
 (2, 'Negocios'),
+(3, 'Estudiantil'),
 (4, 'Entretenimiento');
 
 -- --------------------------------------------------------
@@ -69,6 +70,7 @@ INSERT INTO `colecciones` (`id_coleccion`, `descripcion`) VALUES
 
 CREATE TABLE `pieza` (
   `id_pieza` int(11) NOT NULL,
+  `nombre` varchar(80) NOT NULL,
   `valorCompra` varchar(45) DEFAULT NULL,
   `fechaCompra` varchar(45) DEFAULT NULL,
   `foto` varchar(200) DEFAULT NULL,
@@ -80,8 +82,12 @@ CREATE TABLE `pieza` (
 -- Volcado de datos para la tabla `pieza`
 --
 
-INSERT INTO `pieza` (`id_pieza`, `valorCompra`, `fechaCompra`, `foto`, `categoria`, `colecciones`) VALUES
-(1, '2.500.000', '13-03-2024', 'imagenes\\ApoloZ.png', 1, 1);
+INSERT INTO `pieza` (`id_pieza`, `nombre`, `valorCompra`, `fechaCompra`, `foto`, `categoria`, `colecciones`) VALUES
+(1, 'Acer Nitro 5', '2.500.000', '13-03-2024', 'imagenes\\pc-Gamer.jpeg', 1, 1),
+(2, 'HP NOTEBOOK', '1.500.000', '14-03-24', 'imagenes\\HP-notebook.jpg', 1, 3),
+(3, 'All In One LENOVO', '1.800.000', '14-03-2024', 'imagenes\\Lenovo All-IN-ONE.jpg', 2, 4),
+(4, 'iMac 24', '10.800.000', '14-03-2024', 'imagenes\\APPLE.jpg', 2, 2),
+(5, 'Tablet LENOVO 10', '849.000', '14-03-2024', 'imagenes\\Tablet-LENOVO.jpg', 3, 3);
 
 --
 -- Índices para tablas volcadas
@@ -127,7 +133,7 @@ ALTER TABLE `colecciones`
 -- AUTO_INCREMENT de la tabla `pieza`
 --
 ALTER TABLE `pieza`
-  MODIFY `id_pieza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pieza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

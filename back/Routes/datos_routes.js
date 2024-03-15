@@ -4,12 +4,11 @@ import { datosController } from "../Controllers/datosController.js";
 
 const rutaDatos = express.Router();
 
-
-
+rutaDatos.get("/leer", datosController.Datos);
+rutaDatos.get("/leer/:id_pieza", datosController.DatosUno);
 rutaDatos.post("/agregar", upload.single('foto'), datosController.Insertar);
 rutaDatos.put("/actualizar", upload.single('foto'), datosController.Actualizar);
-
-
+rutaDatos.put("/actualizar/foto/:id_pieza", upload.single('foto'), datosController.ActualizarFoto);
 
 
 export default rutaDatos;
