@@ -48,7 +48,7 @@ const Insertar = async (req, res) => {
         // Ejecutar consulta a la base de datos
         const [productos] = await db.query(query, [nombre, valorCompra, fechaCompra, foto, categoria, colecciones]);
 
-        res.status(200).json({ mensaje: 'Todo ok', productos });
+        res.status(200).json({ mensaje: 'Producto agregado' });
     } catch (error) {
         console.error("Error al obtener los datos:", error);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -69,7 +69,7 @@ const Actualizar = async (req, res) => {
         // Ejecutar consulta a la base de datos
         const [productos] = await db.query(query, [valorCompra, fechaCompra, foto, categoria, colecciones, id_pieza]);
 
-        res.status(200).json({ mensaje: 'Todo ok', productos });
+        res.status(200).json({ mensaje: 'Todo ok' });
     } catch (error) {
         console.error("Error al obtener los datos:", error);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -114,6 +114,6 @@ export const datosController = {
     Insertar,
     Actualizar,
     ActualizarFoto,
-    Eliminar,
+Eliminar,
 };
 
