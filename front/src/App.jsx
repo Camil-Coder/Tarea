@@ -2,9 +2,15 @@ import { Container, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import InsertarModal from './components/insertar_button';
 
 function App() {
   const [data, setData] = useState([]);
+  const [showModal, setShowModal] = useState(false); // Estado del modal cerrado
+
+  const handleShow = () => setShowModal(true); //Abrir Modal
+  const handleClose = () => { setShowModal(false) }; //Cerrar Modal
+
 
   useEffect(() => {
     axios.get('http://localhost:4000/datos/leer')
@@ -23,9 +29,10 @@ function App() {
         <Container>
           <h2>Tarea</h2> <br />
           <div>
-            <Button variant='primary' >
+            <Button variant='primary' onClick={handleShow}>
               Insertar Datos
             </Button>
+            <InsertarModal abrirModal={showModal} cerrarModal={handleClose} />{/*  se envian parametros con el estado del modal */}
           </div>
           <br /><br />
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
@@ -34,14 +41,14 @@ function App() {
                 <Card key={key} style={{ width: '18rem' }}>
                   <Card.Body>
                     <Card.Title>{item.nombre}</Card.Title>
-                    <div style={{ width: '100%', height: '100px', display:'flex', justifyContent:'center'}}>
+                    <div style={{ width: '100%', height: '100px', display: 'flex', justifyContent: 'center' }}>
                       <img src={`http://localhost:4000/${item.foto}`}
                         alt={item.descripcion_categoria} style={{ width: '100px', height: '100%', objectFit: 'contain' }} />
                     </div>
                     <Card.Text>
-                      Precio: {item.valorCompra}
+                      Precio: ${item.valorCompra}
                       <br />
-                      Fecha de Compra: {item.fechaCompra}
+                      Fecha de Compra: {new Date(item.fechaCompra).toLocaleDateString('es')}
                     </Card.Text>
                   </Card.Body>
                   <Card.Footer style={{ backgroundColor: 'gray', color: 'white' }}>

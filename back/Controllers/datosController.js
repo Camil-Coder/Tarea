@@ -19,22 +19,17 @@ const Datos = async (req, res) => {
     }
 };
 
-const DatosUno = async (req, res) => {
-    const id_pieza = parseInt(req.params.id_pieza);
+const DatosTablas = async (req, res) => {
+    const tabla = req.params.tabla;
+    const nombreTabla = tabla;
     try {
-        const query = `SELECT p.*, 
-        col.descripcion AS descripcion_coleccion, cat.descripcion AS descripcion_categoria
-        FROM pieza p
-        INNER JOIN colecciones col ON p.colecciones = col.id_coleccion
-        INNER JOIN categorias cat ON p.categoria = cat.id_categoria
-        WHERE p.id_pieza=?
-        `;
+        const query = `SELECT  * from ${tabla}`;
 
         // Ejecutar consulta a la base de datos
-        const [productos] = await db.query(query, [id_pieza]);
+        const [respuesta] = await db.query(query);
 
         // Enviar respuesta con los productos encontrados
-        res.status(200).json({ productos });
+        res.status(200).json({ mensage: `consulta exitosa en la tabla ${tabla}`, respuesta});
     } catch (error) {
         console.error("Error al obtener los datos:", error);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -99,8 +94,8 @@ const ActualizarFoto = async (req, res) => {
 };
 
 export const datosController = {
-    DatosUno,
     Datos,
+    DatosTablas,
     Insertar,
     Actualizar,
     ActualizarFoto,
