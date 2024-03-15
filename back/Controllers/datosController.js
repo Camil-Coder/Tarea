@@ -5,8 +5,9 @@ const Datos = async (req, res) => {
     try {
         const query = `SELECT p.*, col.descripcion AS descripcion_coleccion, cat.descripcion AS descripcion_categoria
         FROM pieza p
-        INNER JOIN colecciones col ON p.colecciones = col.id_coleccion
-        INNER JOIN categorias cat ON p.categoria = cat.id_categoria`;
+        LEFT JOIN colecciones col ON p.colecciones = col.id_coleccion
+        LEFT JOIN categorias cat ON p.categoria = cat.id_categoria;
+        `;
 
         // Ejecutar consulta a la base de datos
         const [productos] = await db.query(query);
@@ -29,7 +30,7 @@ const DatosTablas = async (req, res) => {
         const [respuesta] = await db.query(query);
 
         // Enviar respuesta con los productos encontrados
-        res.status(200).json({ mensage: `consulta exitosa en la tabla ${tabla}`, respuesta});
+        res.status(200).json({ mensage: `consulta exitosa en la tabla ${tabla}`, respuesta });
     } catch (error) {
         console.error("Error al obtener los datos:", error);
         res.status(500).json({ error: "Error interno del servidor" });
@@ -114,6 +115,6 @@ export const datosController = {
     Insertar,
     Actualizar,
     ActualizarFoto,
-Eliminar,
+    Eliminar,
 };
 

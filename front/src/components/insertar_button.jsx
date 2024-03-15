@@ -19,6 +19,7 @@ const InsertarModal = ({ abrirModal, cerrarModal }) => {
 
     //limpiar campos
     const limpiarCampos = () => {
+        cerrarModal();
         setNombre('');
         setValorCompra('');
         setFechaCompra('');
@@ -70,17 +71,18 @@ const InsertarModal = ({ abrirModal, cerrarModal }) => {
     return (
         <div>
             <Modal show={abrirModal} onHide={cerrarModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>
-                        Insertar Datos de Compra
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
+                <Form onSubmit={agregarPieza}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Insertar Datos de Compra
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
 
                         <Form.Group controlId='formnombre'>
                             <FloatingLabel label='Nombre:' className='mb-3'>
-                                <Form.Control value={nombre} type='text' name='nombre' onChange={(event)=>{setNombre(event.target.value)}}/>
+                                <Form.Control value={nombre} type='text' name='nombre' onChange={(event) => { setNombre(event.target.value) }} required />
                             </FloatingLabel>
                         </Form.Group>
 
@@ -88,7 +90,7 @@ const InsertarModal = ({ abrirModal, cerrarModal }) => {
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>Valor Compra:</InputGroup.Text>
                                 <InputGroup.Text>$</InputGroup.Text>
-                                <Form.Control value={valorCompra} type='number' name='precio' onChange={(event)=>{setValorCompra(event.target.value)}}/>
+                                <Form.Control value={valorCompra} type='number' name='precio' onChange={(event) => { setValorCompra(event.target.value) }} required />
                                 <InputGroup.Text>.00</InputGroup.Text>
                             </InputGroup>
                         </Form.Group>
@@ -96,19 +98,19 @@ const InsertarModal = ({ abrirModal, cerrarModal }) => {
                         <Form.Group controlId='formfecha'>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text>Fecha:</InputGroup.Text >
-                                <Form.Control value={fechaCompra} type='date' name='fecha' onChange={(event)=>{setFechaCompra(event.target.value)}}/>
+                                <Form.Control value={fechaCompra} type='date' name='fecha' onChange={(event) => { setFechaCompra(event.target.value) }} required />
                             </InputGroup>
                         </Form.Group>
 
                         <Form.Group controlId='formfoto'>
                             <InputGroup className="mb-3">
-                                <Form.Control ref={imgref} type='file' name='foto' onChange={(event) => { setFoto(event.target.files[0]) }} />
+                                <Form.Control ref={imgref} type='file' name='foto' onChange={(event) => { setFoto(event.target.files[0]) }} required />
                             </InputGroup>
                         </Form.Group>
 
                         <Form.Group controlId="formcategoria">
-                            <Form.Select value={categoria} name="categoria" className="mb-3" onChange={(event) => { setCategoria(event.target.value) }}>
-                                <option value='' >Seleccione una Categoria</option>
+                            <Form.Select value={categoria} name="categoria" className="mb-3" onChange={(event) => { setCategoria(event.target.value) }} required>
+                                <option value=''>Seleccione una Categoria</option>
                                 {categoriasL.map((dato, key) => {
                                     return (
                                         <option key={key} value={dato.id_categoria}>{dato.descripcion}</option>
@@ -118,22 +120,22 @@ const InsertarModal = ({ abrirModal, cerrarModal }) => {
                         </Form.Group>
 
                         <Form.Group controlId="formcategoria">
-                            <Form.Select value={colecciones} name="categoria" className="mb-3" onChange={(event) => { setColecciones(event.target.value) }}>
-                                <option value='' >Seleccione una Colelccion</option>
+                            <Form.Select value={colecciones} name="categoria" className="mb-3" onChange={(event) => { setColecciones(event.target.value) }} required>
+                                <option value=''>Seleccione una Coleccion</option>
                                 {coleccionesL.map((dato, key) => {
                                     return (
-                                        <option key={key} value={dato.id_coleccion} >{dato.descripcion}</option>
+                                        <option key={key} value={dato.id_coleccion}>{dato.descripcion}</option>
                                     )
                                 })}
                             </Form.Select>
                         </Form.Group>
 
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="success" onClick={agregarPieza}>Insertar Datos</Button>
-                    <Button variant='danger' onClick={cerrarModal}>Cancelar</Button>
-                </Modal.Footer>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="success" type="submit">Insertar Datos</Button>
+                        <Button variant='danger' onClick={cerrarModal}>Cancelar</Button>
+                    </Modal.Footer>
+                </Form>
             </Modal>
         </div>
     );
