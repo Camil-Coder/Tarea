@@ -9,6 +9,7 @@ rutaDatos.get("/leer/:id_pieza", datosController.DatosUno);
 rutaDatos.post("/agregar", upload.single('foto'), datosController.Insertar);
 rutaDatos.put("/actualizar", upload.single('foto'), datosController.Actualizar);
 rutaDatos.put("/actualizar/foto/:id_pieza", upload.single('foto'), datosController.ActualizarFoto);
+rutaDatos.delete("/eliminar/:id_pieza", datosController.Eliminar);
 
 
 export default rutaDatos;

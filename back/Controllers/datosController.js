@@ -98,11 +98,27 @@ const ActualizarFoto = async (req, res) => {
     }
 };
 
+const Eliminar = async (req, res) => {
+    const id_pieza = parseInt(req.params.id_pieza);
+
+    try {
+        const query = `DELETE FROM pieza WHERE id_pieza=?`
+        const [productos] = await db.query(query, [id_pieza]);
+
+        res.status(200).json({ mensaje: 'Todo ok' });
+    } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+};
+
+
 export const datosController = {
     DatosUno,
     Datos,
     Insertar,
     Actualizar,
     ActualizarFoto,
+    Eliminar,
 };
 
